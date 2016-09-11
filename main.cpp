@@ -1,7 +1,7 @@
 // J2T to native Project Carrot tileset file converter
 // Written in 2013 by Soulweaver
 
-#define CONVERTERVERSION "1.0.0"
+#define CONVERTERVERSION "1.0.1"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
