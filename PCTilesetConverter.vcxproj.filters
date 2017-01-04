@@ -22,6 +22,9 @@
     <Filter Include="Documents">
       <UniqueIdentifier>{e83e7a40-8762-4774-b29f-9bf134567e33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Configuration">
+      <UniqueIdentifier>{6b9781df-1901-4a74-b380-cddd2cf7f366}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,7 +41,10 @@
       <Filter>Documents</Filter>
     </None>
     <None Include=".gitignore">
-      <Filter>Documents</Filter>
+      <Filter>Configuration</Filter>
+    </None>
+    <None Include=".gitattributes">
+      <Filter>Configuration</Filter>
     </None>
   </ItemGroup>
 </Project>
