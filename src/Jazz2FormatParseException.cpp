@@ -22,7 +22,7 @@ QString Jazz2FormatParseException::friendlyText() {
             return "File " + getInfo().at(0).toString() + " could not be opened!";
             break;
         case INVALID_MAGIC:
-            return "File header not recognized as a .J2L file!";
+            return "File header not recognized as a " + getInfo().at(0).toString() + " file!";
             break;
         case PASSWORD_PROTECTED:
             return "File is password protected!\nAs a courtesy to level editors, by default only files with no or blank password can be converted.";
