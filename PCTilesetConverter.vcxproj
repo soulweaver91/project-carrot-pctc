@@ -164,6 +164,7 @@
     <ClInclude Include="src\Jazz2Tileset.h" />
     <ClInclude Include="src\Jazz2FormatDataBlock.h" />
     <ClInclude Include="src\Jazz2FormatParseException.h" />
+    <ClInclude Include="src\Version.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

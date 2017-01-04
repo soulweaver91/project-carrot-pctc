@@ -1,8 +1,6 @@
 // J2T to native Project Carrot tileset file converter
 // (c) 2013-2017 Soulweaver
 
-#define CONVERTERVERSION "1.0.1"
-
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -18,6 +16,7 @@
 #include "Jazz2FormatDataBlock.h"
 #include "Jazz2FormatParseException.h"
 #include "Jazz2Tileset.h"
+#include "Version.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
