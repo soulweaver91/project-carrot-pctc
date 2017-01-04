@@ -147,7 +147,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Jazz2FormatDataBlock.cpp" />
+    <ClCompile Include="src\Jazz2FormatParseException.cpp" />
+    <ClCompile Include="src\PCTilesetConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="LICENSE" />
@@ -156,6 +158,10 @@
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Jazz2FormatDataBlock.h" />
+    <ClInclude Include="src\Jazz2FormatParseException.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
