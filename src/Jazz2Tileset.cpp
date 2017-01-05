@@ -1,7 +1,9 @@
 #include "Jazz2Tileset.h"
 
 #include <QFile>
+#include <QSettings>
 #include "Jazz2FormatParseException.h"
+#include "Version.h"
 
 Jazz2Tileset::Jazz2Tileset() {
 }
@@ -79,6 +81,7 @@ Jazz2Tileset* Jazz2Tileset::fromFile(const QString& filename, bool strictParser)
 }
 
 void Jazz2Tileset::saveAsProjectCarrotTileset(const QDir& directory, const QString& uniqueID) {
+    writePCConfigFile(directory.absoluteFilePath("config.ini"), uniqueID);
     std::string tilefile = directory.absoluteFilePath("tiles.png").toStdString();
     std::string maskfile = directory.absoluteFilePath("mask.png").toStdString();
 
@@ -219,6 +222,23 @@ void Jazz2Tileset::loadMaskData(Jazz2FormatDataBlock& block, bool strictParser) 
             }
         }
     }
+}
+
+void Jazz2Tileset::writePCConfigFile(const QString& filename, const QString& uniqueID) {
+    QSettings file(filename, QSettings::IniFormat);
+    if (!file.isWritable()) {
+        throw Jazz2FormatParseException(FILE_CANNOT_BE_OPENED, { filename });
+    }
+
+    file.beginGroup("Version");
+    file.setValue("WritingApp", "PCTC-" + QString(CONVERTERVERSION));
+    file.endGroup();
+
+    file.beginGroup("Tileset");
+    file.setValue("TilesetToken", uniqueID);
+    file.setValue("FormalName", name);
+
+    file.sync();
 }
 
 int Jazz2Tileset::maxSupportedTiles() {

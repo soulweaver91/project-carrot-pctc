@@ -44,5 +44,7 @@ private:
     void loadImageData(Jazz2FormatDataBlock& imageBlock, Jazz2FormatDataBlock& alphaBlock, bool strictParser);
     void loadMaskData(Jazz2FormatDataBlock& block, bool strictParser);
 
+    void writePCConfigFile(const QString& filename, const QString& uniqueID);
+
     int maxSupportedTiles();
 };

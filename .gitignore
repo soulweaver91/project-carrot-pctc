@@ -156,3 +156,4 @@ $RECYCLE.BIN/
 *.j2t
 mask.png
 tiles.png
+config.ini
