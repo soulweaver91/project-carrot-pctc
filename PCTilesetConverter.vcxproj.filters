@@ -41,6 +41,12 @@
     <None Include=".gitattributes">
       <Filter>Configuration</Filter>
     </None>
+    <None Include="PCTilesetConverter.pri">
+      <Filter>Configuration</Filter>
+    </None>
+    <None Include="PCTilesetConverter.pro">
+      <Filter>Configuration</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Jazz2FormatDataBlock.cpp">

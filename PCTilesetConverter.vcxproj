@@ -158,6 +158,8 @@
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
+    <None Include="PCTilesetConverter.pri" />
+    <None Include="PCTilesetConverter.pro" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
