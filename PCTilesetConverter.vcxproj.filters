@@ -69,5 +69,8 @@
     <ClInclude Include="src\Version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\PCTilesetConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

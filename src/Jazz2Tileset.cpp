@@ -116,6 +116,30 @@ void Jazz2Tileset::saveAsProjectCarrotTileset(const QDir& directory, const QStri
     finalImageSurface.saveToFile(maskfile);
 }
 
+void Jazz2Tileset::printData(std::ostream& target) {
+    target << "Tileset name: " << name.toStdString()        << "\n"
+           << " JJ2 version: " << (version == BASE_GAME ? "Base game" : "TSF/CC") << "\n"
+           << "       Tiles: " << tileCount
+           <<      " (out of " << maxSupportedTiles() / 10 << "0 supported by version)\n\n";
+
+    int i = 0;
+    target << "Palette:";
+    for (auto c : palette) {
+        if ((i++ % 8) == 0) {
+            target << "\n  " << QString::number(i).rightJustified(3).toStdString()
+                   << "-"    << QString::number(i + 7).rightJustified(3).toStdString()
+                   << ": ";
+        } else {
+            target << ", ";
+        }
+        target << "#"
+               << QString::number(c.r, 16).rightJustified(2, '0').toStdString()
+               << QString::number(c.g, 16).rightJustified(2, '0').toStdString()
+               << QString::number(c.b, 16).rightJustified(2, '0').toStdString();
+    }
+    target << "\n";
+}
+
 void Jazz2Tileset::loadMetadata(Jazz2FormatDataBlock& block, bool strictParser) {
     palette.clear();
     palette.resize(256);

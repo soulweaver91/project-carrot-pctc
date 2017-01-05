@@ -1,22 +1,26 @@
 // J2T to native Project Carrot tileset file converter
 // (c) 2013-2017 Soulweaver
 
+#include "PCTilesetConverter.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <QByteArray>
-#include <QBitArray>
 #include <QString>
-#include <QFile>
 #include <QDir>
-#include <QVector>
+#include <QFileInfo>
 #include <iostream>
-#include <cassert>
 
 #include "Jazz2FormatDataBlock.h"
 #include "Jazz2FormatParseException.h"
 #include "Jazz2Tileset.h"
 #include "Version.h"
+
+void PCTilesetConverter::convert(const QString& filename, const QString& uniqueID, const QDir& outdir) {
+    auto tileset = Jazz2Tileset::fromFile(filename);
+    tileset->printData(std::cout);
+    tileset->saveAsProjectCarrotTileset(outdir, uniqueID);
+    delete tileset;
+}
 
 int main(int argc, char *argv[]) {
     if (argc < 2 || argc > 4) {
@@ -58,8 +62,9 @@ int main(int argc, char *argv[]) {
 
     try {
         std::cout << "Converting \"" << filename.toStdString() << "\" to Project Carrot tileset \"" << uniqueID.toStdString() << "\"...\n";
-        Jazz2Tileset* tileset = Jazz2Tileset::fromFile(filename, false);
-        tileset->saveAsProjectCarrotTileset(outdir, uniqueID);
+        PCTilesetConverter::convert(filename, uniqueID, outdir);
+        std::cout << "\nTileset converted successfully.\n"
+                  << "Press Enter to continue...\n";
     } catch (Jazz2FormatParseException e) {
         std::cout << "ERROR: " << e.friendlyText().toStdString() << "\n";
         getchar();
@@ -69,4 +74,7 @@ int main(int argc, char *argv[]) {
         getchar();
         return EXIT_FAILURE;
     }
+
+    getchar();
+    return EXIT_SUCCESS;
 }
