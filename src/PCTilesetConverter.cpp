@@ -19,63 +19,54 @@
 #include "Version.h"
 
 int main(int argc, char *argv[]) {
-    if (argc < 3) {
+    if (argc < 2 || argc > 4) {
         std::cout << "PCTC version " << CONVERTERVERSION << "\n"
                   << "Usage: pctc name inputfile\n\n"
                   << "Converts a Jazz Jackrabbit 2 tileset file (.j2t) to the native, multiple file\n"
                   << "based format recognized by Project Carrot.\n\n"
                   << "Parameters:\n"
-                  << "  name         Required. The unique identifying name of this tileset. Use only\n"
+                  << "  name         Optional. The unique identifying name of this tileset. Use only\n"
                   << "               Latin letters, numbers and underscores. For the purposes of\n"
                   << "               being cross platform compliant, identifiers are case\n"
                   << "               insensitive.\n"
+                  << "               If omitted, the name of the input file is used.\n"
                   << "  inputfile    Required. Complete or relative path to a J2T format file to be\n"
                   << "               converted.\n";
         return EXIT_FAILURE;
     }
 
-    QString unique_id(argv[1]);
+    QString uniqueID;
     QString filename;
-    for (int i = 2; i < argc; ++i) {
-        filename += argv[i];
+    if (argc == 3) {
+        uniqueID = argv[1];
+        filename = argv[2];
+    } else {
+        filename = argv[1];
+        uniqueID = QFileInfo(filename).baseName();
     }
-
-    QFile fh(filename);
-    if (!(fh.exists())) {
-        std::cerr << "ERROR: The input file \"" << filename.toLocal8Bit().data() << "\" cannot be found!\n";
-        return EXIT_FAILURE;
-    }
-    if (!(fh.open(QIODevice::ReadOnly))) {
-        std::cerr << "ERROR: Cannot open input file \"" << filename.toLocal8Bit().data() << "\"!\n";
-        return EXIT_FAILURE;
-    }
-    std::cout << "Opening input file \"" << filename.toLocal8Bit().data() << "\"...\n";
-
-    qint32 filesize = fh.size();
 
     QDir outdir(QDir::current());
-    if (!outdir.mkdir(unique_id)) {
+    if (!outdir.mkdir(uniqueID)) {
         int idx = 0;
-        while (!outdir.mkdir(unique_id + "_" + QString::number(idx))) {
+        while (!outdir.mkdir(uniqueID + "_" + QString::number(idx))) {
             idx++;
         }
-        outdir.cd(unique_id + "_" + QString::number(idx));
+        outdir.cd(uniqueID + "_" + QString::number(idx));
     } else {
-        outdir.cd(unique_id);
+        outdir.cd(uniqueID);
     }
 
     try {
+        std::cout << "Converting \"" << filename.toStdString() << "\" to Project Carrot tileset \"" << uniqueID.toStdString() << "\"...\n";
         Jazz2Tileset* tileset = Jazz2Tileset::fromFile(filename, false);
-        tileset->saveAsProjectCarrotTileset(outdir, unique_id);
+        tileset->saveAsProjectCarrotTileset(outdir, uniqueID);
     } catch (Jazz2FormatParseException e) {
         std::cout << "ERROR: " << e.friendlyText().toStdString() << "\n";
         getchar();
         return EXIT_FAILURE;
     } catch (...) {
         std::cout << "Aborting conversion...\n";
-        if (fh.isOpen()) {
-            fh.close();
-        }
+        getchar();
         return EXIT_FAILURE;
     }
 }
