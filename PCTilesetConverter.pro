@@ -7,7 +7,7 @@ TARGET = PCTilesetConverter
 
 QT += core
 DEFINES += QT_DLL
-CONFIG += c++14 console
+CONFIG += c++14 debug_and_release console
 
 INCLUDEPATH += ./GeneratedFiles \
     .
