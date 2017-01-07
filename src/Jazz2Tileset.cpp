@@ -15,12 +15,12 @@ Jazz2Tileset::Jazz2Tileset(Jazz2FormatDataBlock& header, quint32 fileLength, boo
     // Read the next four bytes; should spell out "TILE"
     qint32 id = header.readUInt();
     if (id != 0x454C4954) {
-        throw Jazz2FormatParseException(INVALID_MAGIC, { ".J2L" });
+        throw Jazz2FormatParseException(INVALID_MAGIC, { ".J2T" });
     }
 
     quint32 hash = header.readUInt();
     if (hash != 0xAFBEADDE) {
-        throw Jazz2FormatParseException(INVALID_MAGIC, { ".J2L" });
+        throw Jazz2FormatParseException(INVALID_MAGIC, { ".J2T" });
     }
 
     name = header.readRawBytes(32);
