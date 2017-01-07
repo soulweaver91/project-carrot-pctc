@@ -26,7 +26,7 @@ Jazz2Tileset::Jazz2Tileset(Jazz2FormatDataBlock& header, quint32 fileLength, boo
     name = header.readRawBytes(32);
 
     quint16 versionNum = header.readUShort();
-    version = (versionNum <= 257 ? BASE_GAME : TSF);
+    version = (versionNum <= 512 ? BASE_GAME : TSF);
 
     quint32 recordedSize = header.readUInt();
     if (strictParser && fileLength != recordedSize) {
