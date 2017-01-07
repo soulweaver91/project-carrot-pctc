@@ -1,2 +1,2 @@
 #pragma once
-#define CONVERTERVERSION "1.1.0"
+#define CONVERTERVERSION "1.1.1"
